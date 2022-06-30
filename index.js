@@ -1,13 +1,6 @@
-const http = require('http')
-const app = http.createServer((req,res) =>{
-    res.writeHead(200,{ 'Content-Type': 'application/json'})
-    res.end(JSON.stringify(notes))
-})
+const express = require('express')
+const app = express()
 const PORT = 3000;
-app.listen(PORT)
-
-console.log(`Server running on Port ${PORT}`)
-
 
 let notes = [
     {
@@ -28,4 +21,16 @@ let notes = [
       date: "2022-05-30T19:20:14.298Z",
       important: true
     }
-  ]
+]
+
+app.get('/', (req,res)=>{
+    res.send('<h1>Hello World</h1>')
+})
+
+app.get('/api/notes', (req,res)=>{
+    res.json(notes)
+})
+
+app.listen(PORT, ()=>{
+    console.log(`Server running on Port ${PORT}`)
+})
